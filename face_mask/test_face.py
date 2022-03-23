@@ -7,13 +7,13 @@ import time
 import cv2
 people_list = []
 
-video_capture = VideoStream(src=0).start()
+video_capture = cv2.VideoCapture(0)
 
 while True:
     _, frame = video_capture.read()
     image = imutils.resize(frame, width=500)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades +'haarcascade_frontalface_default.xml')
     faces = faceCascade.detectMultiScale(gray, 1.3, 5)
 
     detections = faceCascade.detectMultiScale(gray, 1.15, 5)
@@ -30,3 +30,4 @@ while True:
 
     # Display the resulting frame
     cv2.imshow('Video', frame)
+    cv2.waitKey(0)
